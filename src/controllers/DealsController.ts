@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import axios from 'axios';
 
-import { validateUrl } from '../utils';
+import { validateUrl, isValidDate } from '../utils';
 import { PipedriveService } from '../services/PipedriveService';
-
+import { Deal } from '../models/deal';
 
 export class Deals {
-  async refresh(req: Request, res: Response) {
-    const { token_pipedrive, domain_pipedrive, token_bling } = req.query;
+  async store(req: Request, res: Response) {
+    const { token_pipedrive, domain_pipedrive, token_bling } = req.body;
 
     console.log(token_pipedrive, domain_pipedrive)
 
@@ -42,6 +42,42 @@ export class Deals {
     return res.status(200).json({
       message: 'Pedidos enviados para o Bling'
     });
+
+  }
+
+  async index(req: Request, res: Response) {
+    const { date } = req.query;
+
+    if (!date) {
+      return res.status(400).json({
+        message: 'Informe a data para consulta no formato (AAAA-MM-DD)'
+      });
+    }
+
+    if (!isValidDate(date.toString())) {
+      return res.status(400).json({
+        message: 'Informe a data para consulta no formato (AAAA-MM-DD)'
+      });
+    }
+
+    const deals = await Deal.find({ date });
+
+    if (deals.length > 0) {
+      const totalValue = deals.reduce((a: any, b: any) => ({ value: a.value + b.value }));
+      return res.status(200).json({
+        message: 'Registros encontrados',
+        date,
+        total: totalValue,
+        deals,
+      });
+    } else {
+      return res.status(404).json({
+        message: 'Não foram encontrados registros pra essa data',
+        date,
+        deals,
+      });
+    }
+
 
   }
 }

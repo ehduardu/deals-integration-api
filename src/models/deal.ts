@@ -6,13 +6,16 @@ const DealSchema = new mongoose.Schema({
     required: true
   },
   date: {
-    type: Date
+    type: String
   },
   address: {
     type: String,
   },
   value: {
     type: Number,
+  },
+  created_at: {
+    type: Date
   }
 });
 

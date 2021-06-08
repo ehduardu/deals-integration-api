@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import { Deals } from '../controllers/DealsController';
-import { mongoose } from '../database';
 
 
 const router = Router();
@@ -13,6 +12,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/deals/refresh', deals.refresh)
+router.post('/deals/store', deals.store);
+router.get('/deals', deals.index);
 
 export { router }

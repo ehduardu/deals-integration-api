@@ -48,9 +48,10 @@ export class PipedriveService {
 
           await Deal.create({
             name: clientObj.nome,
-            date: new Date(),
+            date: new Date().toISOString().split('T')[0],
             address: clientObj.endereco || '',
             value: deal.value,
+            created_at: new Date(),
           });
         } catch (error) {
           console.error(error);
