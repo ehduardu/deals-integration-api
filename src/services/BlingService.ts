@@ -4,8 +4,6 @@ import axios from 'axios';
 export class BlingDriveService {
 
   async sendOrder(orderXML: string, token: string) {
-    console.log(token);
-
     const bling = axios.create({
       baseURL: 'https://bling.com.br/Api/v2',
     });

@@ -40,8 +40,7 @@ export class PipedriveService {
           numero: deal.id
         }
 
-        const orderXML = parse('pedido', orderObj)
-        console.log(orderXML);
+        const orderXML = parse('pedido', orderObj);
 
         try {
           await blingService.sendOrder(orderXML, tokenBling);

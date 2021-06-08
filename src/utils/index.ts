@@ -12,6 +12,6 @@ export const validateUrl = (url: string) => {
 }
 
 export const isValidDate = (dateString: string) => {
-  var regEx = /^\d{4}-\d{2}-\d{2}$/;
+  const regEx = /^\d{4}-\d{2}-\d{2}$/;
   return dateString.match(regEx) != null;
 }

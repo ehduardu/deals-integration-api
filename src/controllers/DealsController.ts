@@ -9,8 +9,6 @@ export class Deals {
   async store(req: Request, res: Response) {
     const { token_pipedrive, domain_pipedrive, token_bling } = req.body;
 
-    console.log(token_pipedrive, domain_pipedrive)
-
     if (!token_pipedrive) {
       return res.status(400).json({
         message: 'Informe o token de API do Pipedrive'
@@ -44,6 +42,7 @@ export class Deals {
     });
 
   }
+
 
   async index(req: Request, res: Response) {
     const { date } = req.query;
