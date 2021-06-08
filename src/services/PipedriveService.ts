@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import { parse } from 'js2xmlparser';
 
 import { BlingDriveService } from '../services/BlingService';
+import { Deal } from '../models/deal';
 
 
 export class PipedriveService {
@@ -42,7 +43,17 @@ export class PipedriveService {
         const orderXML = parse('pedido', orderObj)
         console.log(orderXML);
 
-        await blingService.sendOrder(orderXML, tokenBling);
+        try {
+          await blingService.sendOrder(orderXML, tokenBling);
+
+          await Deal.create({
+            name: clientObj.nome,
+            address: clientObj.endereco || '',
+          });
+        } catch (error) {
+          console.error(error);
+        }
+
       });
 
       const pagination = result.data?.additional_data?.pagination;

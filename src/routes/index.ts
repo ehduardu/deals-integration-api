@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
 import { Deals } from '../controllers/DealsController';
+import { mongoose } from '../database';
+
 
 const router = Router();
 const deals = new Deals();
