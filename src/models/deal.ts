@@ -5,20 +5,17 @@ const DealSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  date: {
+    type: Date
+  },
   address: {
     type: String,
+  },
+  value: {
+    type: Number,
   }
 });
 
 const Deal = mongoose.model('Deal', DealSchema, 'Deals');
-
-// mongoose
-//   .connect(uri, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//   })
-//   .then(() => console.log("Database connected!"))
-//   .catch(err => console.log(err));
 
 export { Deal }

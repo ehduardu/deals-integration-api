@@ -30,8 +30,8 @@ export class PipedriveService {
         const item = {
           codigo: product.code,
           descricao: product.name,
-          qtde: Math.floor(Math.random() * 100),
-          vlr_unit: product.prices[0]?.price
+          qtde: 1,
+          vlr_unit: deal.value,
         };
 
         const orderObj = {
@@ -48,7 +48,9 @@ export class PipedriveService {
 
           await Deal.create({
             name: clientObj.nome,
+            date: new Date(),
             address: clientObj.endereco || '',
+            value: deal.value,
           });
         } catch (error) {
           console.error(error);
